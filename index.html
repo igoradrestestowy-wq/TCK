@@ -64,6 +64,26 @@
             font-weight: bold;
         }
 
+        .menu-toggle {
+            display: none;
+            width: 44px;
+            height: 44px;
+            border: 0;
+            border-radius: 6px;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 26px;
+            height: 3px;
+            margin: 5px auto;
+            border-radius: 2px;
+            background: var(--primary);
+            transition: 0.25s;
+        }
+
         .hero {
             background: linear-gradient(135deg, rgba(74, 107, 108, 0.1) 0%, rgba(143, 168, 155, 0.2) 100%);
             padding: 80px 20px;
@@ -160,6 +180,54 @@
             font-size: 0.9rem;
             margin-top: 40px;
         }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-wrap: wrap;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                width: 100%;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+
+            nav.open {
+                max-height: 400px;
+            }
+
+            nav a {
+                display: block;
+                margin: 0;
+                padding: 12px 0;
+                border-top: 1px solid rgba(74, 107, 108, 0.12);
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .hero {
+                padding: 50px 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -167,7 +235,12 @@
     <header>
         <div class="nav-container">
             <a href="index.html" class="logo">Małgorzata Rzewuska</a>
-            <nav>
+            <button class="menu-toggle" type="button" aria-label="Otwórz menu" aria-expanded="false" aria-controls="main-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav id="main-nav">
                 <a href="index.html" class="active">Strona główna</a>
                 <a href="o-terapii.html">O terapii</a>
                 <a href="wskazania.html">Wskazania</a>
@@ -178,32 +251,54 @@
         </div>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Terapia Czaszkowo–Krzyżowa</h1>
-            <h2>Odzyskaj równowagę psychofizyczną.</h2>
-            <p>Oferuję bezpieczną, holistyczną terapię cranio-sacralną dla dzieci, młodzieży oraz dorosłych, wspierając naturalne procesy samoregulacji organizmu.</p>
-            <div class="quote">
-                „To czas, w którym możesz zatrzymać się na chwilę i z troską skierować uwagę na siebie.”
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Terapia Czaszkowo–Krzyżowa</h1>
+                <h2>Odzyskaj równowagę psychofizyczną.</h2>
+                <p>Oferuję bezpieczną, holistyczną terapię cranio-sacralną dla dzieci, młodzieży oraz dorosłych, wspierając naturalne procesy samoregulacji organizmu.</p>
+                <div class="quote">
+                    „To czas, w którym możesz zatrzymać się na chwilę i z troską skierować uwagę na siebie.”
+                </div>
+                <div style="margin-top: 20px;">
+                    <a href="kontakt.html" class="btn">Umów spotkanie</a>
+                    <a href="https://www.facebook.com/reel/1441852891090282" target="_blank" class="btn btn-video">Zobacz wideo</a>
+                </div>
             </div>
-            <div style="margin-top: 20px;">
-                <a href="kontakt.html" class="btn">Umów spotkanie</a>
-                <a href="https://www.facebook.com/reel/1441852891090282" target="_blank" class="btn btn-video">Zobacz wideo</a>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="section">
-        <h2>Witaj w gabinecie</h2>
-        <div class="card" style="max-width: 800px; margin: 0 auto; text-align: center;">
-            <p>Oferuję terapię czaszkowo-krzyżową dla dzieci, młodzieży i osób dorosłych, wykorzystując delikatne techniki manualne ukierunkowane na wspieranie regulacji napięcia, świadomości ciała oraz równowagi psychofizycznej.</p>
-            <a href="o-terapii.html" class="btn" style="margin-top: 20px;">Dowiedz się więcej o terapii</a>
-        </div>
-    </section>
+        <section class="section">
+            <h2>Witaj w gabinecie</h2>
+            <div class="card" style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <p>Oferuję terapię czaszkowo-krzyżową dla dzieci, młodzieży i osób dorosłych, wykorzystując delikatne techniki manualne ukierunkowane na wspieranie regulacji napięcia, świadomości ciała i dobrego samopoczucia.</p>
+                <a href="o-terapii.html" class="btn" style="margin-top: 20px;">Dowiedz się więcej o terapii</a>
+            </div>
+        </section>
+    </main>
 
     <footer>
         <p>&copy; 2026 Małgorzata Rzewuska. Wszelkie prawa zastrzeżone.</p>
     </footer>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mainNav = document.querySelector('#main-nav');
+
+        menuToggle.addEventListener('click', () => {
+            const isOpen = mainNav.classList.toggle('open');
+            menuToggle.classList.toggle('active', isOpen);
+            menuToggle.setAttribute('aria-expanded', String(isOpen));
+            menuToggle.setAttribute('aria-label', isOpen ? 'Zamknij menu' : 'Otwórz menu');
+        });
+
+        mainNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('open');
+                menuToggle.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+    </script>
 
 </body>
 </html>
