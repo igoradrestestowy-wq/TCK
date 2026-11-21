@@ -9,20 +9,44 @@
             --primary: #4A6B6C; --secondary: #8FA89B; --dark: #2F3E3F; --light: #F4F7F5; --accent: #D7A98C; --white: #ffffff;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--dark); background-color: var(--light); }
+        html { -webkit-text-size-adjust: 100%; }
+        body { overflow-x: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--dark); background-color: var(--light); }
         header { background-color: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 20px; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 20px; gap: 12px; }
         .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
-        nav a { color: var(--dark); text-decoration: none; margin-left: 20px; font-size: 0.95rem; transition: color 0.3s; }
+        nav { display: flex; align-items: center; gap: 12px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
+        nav::-webkit-scrollbar { display: none; }
+        nav a { color: var(--dark); text-decoration: none; margin-left: 0; font-size: 0.95rem; transition: color 0.3s; flex: 0 0 auto; }
         nav a:hover, nav a.active { color: var(--primary); font-weight: bold; }
         .section { padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
         .section h2 { font-size: 2rem; color: var(--primary); margin-bottom: 30px; text-align: center; position: relative; }
         .section h2::after { content: ''; display: block; width: 50px; height: 3px; background-color: var(--accent); margin: 10px auto 0 auto; }
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
         .card { background: var(--white); padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        .card p + br { display: none; }
+        .card p { margin-bottom: 12px; }
+        .card p:last-child { margin-bottom: 0; }
         .list-bullet li { position: relative; padding-left: 20px; margin-bottom: 8px; list-style: none; }
         .list-bullet li::before { content: "•"; position: absolute; left: 0; color: var(--accent); font-weight: bold; font-size: 1.2rem; top: -2px; }
         footer { background-color: var(--dark); color: var(--white); text-align: center; padding: 20px; font-size: 0.9rem; margin-top: 40px; }
+
+        @media (max-width: 768px) {
+            .nav-container { align-items: flex-start; flex-direction: column; padding: 14px 16px; }
+            nav { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; gap: 6px 12px; white-space: normal; overflow-x: visible; }
+            nav a { text-align: center; }
+            .section { padding: 36px 16px; }
+            .section h2 { font-size: 1.65rem; }
+            .grid-2 { grid-template-columns: 1fr; gap: 20px; }
+            .card { padding: 22px 18px; }
+            footer { padding: 18px 16px; }
+        }
+
+        @media (max-width: 420px) {
+            .logo { font-size: 1.1rem; }
+            nav { grid-template-columns: repeat(2, 1fr); }
+            nav a { font-size: 0.9rem; }
+            .section h2 { font-size: 1.45rem; }
+        }
     </style>
 </head>
 <body>
@@ -44,16 +68,12 @@
         <h2>Czym jest terapia cranio–sacralna?</h2>
         <div class="grid-2">
             <div class="card">
-               <p>Terapia czaszkowo-krzyżowa to delikatna, nieinwazyjna metoda pracy z ciałem, uwzględniająca wzajemne powiązania pomiędzy układem nerwowym, strukturami czaszki, kręgosłupem, kością krzyżową oraz układem powięziowym. Szczególną uwagę poświęca się napięciom w obrębie tkanek łącznych, opon mózgowo-rdzeniowych, przepony, klatki piersiowej i miednicy.</p>
-<br>
-<p>Podczas sesji terapeuta wykorzystuje subtelny dotyk i niewielki nacisk, pracując w obrębie głowy, kręgosłupa, klatki piersiowej, przepony i miednicy. W podejściu czaszkowo-krzyżowym uwzględnia się również rytm czaszkowo-krzyżowy, związany z koncepcją pulsacyjnej aktywności układu czaszkowo-krzyżowego.</p>
-<br>
-<p>Celem terapii jest wspieranie rozluźnienia tkanek, zmniejszanie odczuwania napięcia, poprawa świadomości ciała oraz stworzenie warunków sprzyjających odprężeniu i regulacji układu nerwowego. Istotną rolę odgrywa również praca z układem powięziowym, w szczególności w obrębie przepony i dna miednicy.</p>
-<br>
-<p>Stres, przeciążenia fizyczne, urazy oraz trudne doświadczenia emocjonalne mogą wpływać na napięcie mięśniowo-powięziowe i ogólny komfort funkcjonowania. Delikatna praca z ciałem może wspierać proces relaksacji, poczucie bezpieczeństwa i dobrostan psychofizyczny.</p>
-<br>
-<p>Terapia jest dostosowywana indywidualnie do potrzeb i możliwości osoby korzystającej z sesji. Może być stosowana u dzieci, młodzieży i dorosłych, z uwzględnieniem ich stanu zdrowia oraz ewentualnych przeciwwskazań.</p>
-          </div>
+               <p>Terapia czaszkowo-krzyżowa to delikatna, nieinwazyjna metoda pracy z ciałem, uwzględniająca wzajemne powiązania pomiędzy układem nerwowym, strukturami czaszki, kręgosłupem,</p>
+               <p>Podczas sesji terapeuta wykorzystuje subtelny dotyk i niewielki nacisk, pracując w obrębie głowy, kręgosłupa, klatki piersiowej, przepony i miednicy. W podejściu czaszkowo-krzyżowym uwzględnia się indywidualną reakcję organizmu oraz potrzebę komfortu i bezpieczeństwa podczas spotkania.</p>
+               <p>Celem terapii jest wspieranie rozluźnienia tkanek, zmniejszanie odczuwania napięcia, poprawa świadomości ciała oraz stworzenie warunków sprzyjających odprężeniu i regulacji układu nerwowego.</p>
+               <p>Stres, przeciążenia fizyczne, urazy oraz trudne doświadczenia emocjonalne mogą wpływać na napięcie mięśniowo-powięziowe i ogólny komfort funkcjonowania. Delikatna praca z ciałem może wspierać odbudowę równowagi i poczucia spokoju.</p>
+               <p>Terapia jest dostosowywana indywidualnie do potrzeb i możliwości osoby korzystającej z sesji. Może być stosowana u dzieci, młodzieży i dorosłych, z uwzględnieniem ich stanu zdrowia oraz możliwości komfortowego udziału w terapii.</p>
+            </div>
             <div class="card">
                 <h3>Główne elementy dynamiki systemu:</h3>
                 <ul class="list-bullet" style="margin-top: 15px;">
